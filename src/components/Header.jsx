@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Logo from './Logo';
 import { useApp } from '../context/AppContext';
-import { Menu, X, UserCheck, Shield, BookOpen, Compass, FileText, ArrowRight } from 'lucide-react';
+import { Menu, X, UserCheck, Shield } from 'lucide-react';
 
 export default function Header() {
   const { currentView, navigateTo, isLoggedIn, studentId } = useApp();
@@ -37,30 +37,46 @@ export default function Header() {
       top: 0,
       left: 0,
       width: '100%',
+      maxWidth: '100vw',
       zIndex: 950,
       backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.98)' : '#FFFFFF',
       boxShadow: isScrolled ? '0 4px 20px rgba(11, 27, 61, 0.08)' : '0 2px 10px rgba(11, 27, 61, 0.04)',
       borderBottom: '2px solid var(--color-gold-border)',
-      transition: 'all 0.3s ease'
+      transition: 'all 0.3s ease',
+      boxSizing: 'border-box'
     }}>
       <div className="container" style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        height: '84px'
+        height: '76px',
+        padding: '0 1rem',
+        boxSizing: 'border-box',
+        maxWidth: '1240px',
+        margin: '0 auto'
       }}>
         
-        {/* Brand Logo */}
+        {/* Brand Logo Link */}
         <button 
           onClick={() => handleNavClick('home')}
-          style={{ background: 'none', border: 'none', padding: 0, textAlign: 'left' }}
+          style={{
+            background: 'none',
+            border: 'none',
+            padding: 0,
+            textAlign: 'left',
+            display: 'flex',
+            alignItems: 'center',
+            minWidth: 0,
+            maxWidth: 'calc(100% - 60px)',
+            overflow: 'hidden'
+          }}
         >
           <Logo size="normal" showTagline={true} />
         </button>
 
         {/* Desktop Navigation Links */}
-        <nav className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+        <nav className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             {navItems.map((item) => {
               const active = currentView === item.view;
               return (
@@ -68,7 +84,7 @@ export default function Header() {
                   key={item.label}
                   onClick={() => handleNavClick(item.view)}
                   style={{
-                    fontSize: '0.92rem',
+                    fontSize: '0.9rem',
                     fontWeight: active ? 800 : 600,
                     color: active ? 'var(--color-gold-dark)' : 'var(--color-navy)',
                     borderBottom: active ? '2px solid var(--color-gold)' : '2px solid transparent',
@@ -85,23 +101,23 @@ export default function Header() {
           </div>
 
           {/* Action CTAs */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginLeft: '0.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginLeft: '0.5rem' }}>
             {isLoggedIn ? (
               <button 
                 onClick={() => handleNavClick('student-portal')}
                 className="btn btn-navy"
-                style={{ fontSize: '0.88rem', padding: '0.65rem 1.25rem' }}
+                style={{ fontSize: '0.85rem', padding: '0.55rem 1.1rem' }}
               >
-                <UserCheck size={16} />
+                <UserCheck size={15} />
                 <span>Portal ({studentId.split('-')[2]})</span>
               </button>
             ) : (
               <button 
                 onClick={() => handleNavClick('student-login')}
                 className="btn btn-primary"
-                style={{ fontSize: '0.88rem', padding: '0.65rem 1.25rem' }}
+                style={{ fontSize: '0.85rem', padding: '0.55rem 1.1rem' }}
               >
-                <UserCheck size={16} />
+                <UserCheck size={15} />
                 <span>Student Login</span>
               </button>
             )}
@@ -113,8 +129,8 @@ export default function Header() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                width: '38px',
-                height: '38px',
+                width: '36px',
+                height: '36px',
                 borderRadius: 'var(--radius-sm)',
                 backgroundColor: 'var(--color-bg-light)',
                 border: '1px solid var(--color-border)',
@@ -122,7 +138,7 @@ export default function Header() {
                 transition: 'all 0.2s ease'
               }}
             >
-              <Shield size={18} />
+              <Shield size={16} />
             </button>
           </div>
 
@@ -135,14 +151,16 @@ export default function Header() {
           aria-label="Toggle Three-line Menu"
           style={{
             display: 'none',
-            padding: '0.6rem',
+            padding: '0.5rem',
             color: 'var(--color-navy)',
             backgroundColor: 'var(--color-gold-light)',
             borderRadius: 'var(--radius-sm)',
-            border: '1px solid var(--color-gold-border)'
+            border: '1px solid var(--color-gold-border)',
+            flexShrink: 0,
+            marginLeft: '0.5rem'
           }}
         >
-          {mobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
+          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
       </div>
@@ -153,44 +171,49 @@ export default function Header() {
           className="mobile-menu-drawer animate-fade-in"
           style={{
             position: 'absolute',
-            top: '84px',
+            top: '76px',
             left: 0,
             width: '100%',
+            maxWidth: '100vw',
             backgroundColor: '#FFFFFF',
             borderBottom: '4px solid var(--color-gold)',
             boxShadow: '0 15px 30px rgba(11, 27, 61, 0.2)',
-            padding: '1.5rem',
+            padding: '1.25rem 1rem',
             display: 'flex',
             flexDirection: 'column',
-            gap: '1.25rem'
+            gap: '1rem',
+            boxSizing: 'border-box',
+            zIndex: 999
           }}
         >
           <div style={{
-            fontSize: '0.8rem',
+            fontSize: '0.78rem',
             fontWeight: 800,
             color: 'var(--color-gold-dark)',
             letterSpacing: '1.5px',
             textTransform: 'uppercase',
             borderBottom: '1px solid var(--color-border)',
-            paddingBottom: '0.5rem'
+            paddingBottom: '0.4rem'
           }}>
             ILMI NAVIGATION MENU (■)
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
             {navItems.map((item) => (
               <button
                 key={item.label}
                 onClick={() => handleNavClick(item.view)}
                 style={{
-                  fontSize: '1.05rem',
+                  fontSize: '0.98rem',
                   fontWeight: 700,
                   color: 'var(--color-navy)',
                   textAlign: 'left',
-                  padding: '0.6rem 0.5rem',
+                  padding: '0.55rem 0.65rem',
                   borderRadius: 'var(--radius-sm)',
                   backgroundColor: currentView === item.view ? 'var(--color-gold-light)' : 'transparent',
-                  border: 'none'
+                  border: 'none',
+                  width: '100%',
+                  boxSizing: 'border-box'
                 }}
               >
                 • {item.label}
@@ -200,14 +223,14 @@ export default function Header() {
 
           <div style={{
             borderTop: '1px dashed var(--color-border)',
-            paddingTop: '1rem',
+            paddingTop: '0.85rem',
             display: 'flex',
             flexDirection: 'column',
-            gap: '0.75rem'
+            gap: '0.65rem'
           }}>
             <button 
               onClick={() => handleNavClick('student-login')}
-              className="btn btn-primary btn-lg"
+              className="btn btn-primary"
               style={{ width: '100%' }}
             >
               <UserCheck size={18} />

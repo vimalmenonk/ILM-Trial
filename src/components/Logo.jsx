@@ -13,26 +13,25 @@ export default function Logo({ variant = 'default', size = 'normal', showTagline
   const goldColor = '#D4AF37';
   const ringColor = '#D4AF37';
 
-  const sizeStyles = {
-    small: { height: '42px' },
-    normal: { height: '56px' },
-    large: { height: '72px' },
-  };
-
   return (
     <div 
       className={`ilm-logo-container ${variant}`}
       style={{
         display: 'inline-flex',
         alignItems: 'center',
-        gap: '0.85rem',
+        gap: '0.65rem',
         userSelect: 'none',
-        ...sizeStyles[size] || sizeStyles.normal
+        maxWidth: '100%',
+        boxSizing: 'border-box'
       }}
     >
       <svg
         viewBox="0 0 160 140"
-        style={{ height: '100%', width: 'auto', flexShrink: 0 }}
+        style={{
+          height: size === 'small' ? '36px' : size === 'large' ? '64px' : '46px',
+          width: 'auto',
+          flexShrink: 0
+        }}
         aria-label="ILM Career Consultancy Logo"
       >
         {/* Outer Golden Arc / Circle Ring */}
@@ -52,14 +51,11 @@ export default function Logo({ variant = 'default', size = 'normal', showTagline
         />
 
         {/* Top Emblem: Rising Person & Star above Open Book */}
-        {/* Star */}
         <polygon
           points="80,16 83,23 90,24 85,29 86,36 80,32 74,36 75,29 70,24 77,23"
           fill={goldColor}
         />
-        {/* Figure Head */}
         <circle cx="80" cy="38" r="4.5" fill={goldColor} />
-        {/* Figure Wings/Arms */}
         <path
           d="M 68,48 C 74,40 86,40 92,48"
           fill="none"
@@ -97,14 +93,17 @@ export default function Logo({ variant = 'default', size = 'normal', showTagline
         </text>
       </svg>
 
-      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', minWidth: 0, flexShrink: 1 }}>
         <div style={{
           fontFamily: "'Outfit', sans-serif",
           fontWeight: 800,
-          fontSize: size === 'small' ? '1.15rem' : size === 'large' ? '1.75rem' : '1.45rem',
+          fontSize: size === 'small' ? '1rem' : size === 'large' ? '1.5rem' : 'clamp(1.05rem, 3.5vw, 1.35rem)',
           color: textColor,
-          letterSpacing: '0.05em',
-          lineHeight: 1.1
+          letterSpacing: '0.02em',
+          lineHeight: 1.15,
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis'
         }}>
           ILM <span style={{ color: goldColor, fontWeight: 600 }}>Career Consultancy</span>
         </div>
@@ -113,14 +112,17 @@ export default function Logo({ variant = 'default', size = 'normal', showTagline
           <div style={{
             fontFamily: "'Plus Jakarta Sans', sans-serif",
             fontWeight: 700,
-            fontSize: size === 'small' ? '0.62rem' : '0.72rem',
+            fontSize: size === 'small' ? '0.55rem' : 'clamp(0.55rem, 1.8vw, 0.68rem)',
             color: isLight ? 'rgba(255, 255, 255, 0.85)' : '#475569',
-            letterSpacing: '0.12em',
-            marginTop: '0.2rem',
+            letterSpacing: '0.08em',
+            marginTop: '0.15rem',
             textTransform: 'uppercase',
             display: 'flex',
             alignItems: 'center',
-            gap: '0.35rem'
+            gap: '0.25rem',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis'
           }}>
             <span>INTEGRITY</span>
             <span style={{ color: goldColor }}>•</span>

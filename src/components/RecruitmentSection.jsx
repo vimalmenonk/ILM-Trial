@@ -1,6 +1,6 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
-import { Users, TrendingUp, ClipboardList, MapPin, Trophy, ArrowRight, Sparkles } from 'lucide-react';
+import { Users, TrendingUp, ClipboardList, MapPin, Mail, ArrowRight, Sparkles } from 'lucide-react';
 
 export default function RecruitmentSection() {
   const { navigateTo } = useApp();
@@ -27,9 +27,11 @@ export default function RecruitmentSection() {
         {/* 3 Executive Positions */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '2rem',
-          marginBottom: '3.5rem'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '1.75rem',
+          marginBottom: '3rem',
+          width: '100%',
+          boxSizing: 'border-box'
         }}>
           {[
             {
@@ -54,34 +56,36 @@ export default function RecruitmentSection() {
                 key={pos.title}
                 style={{
                   backgroundColor: 'var(--color-bg-light)',
-                  padding: '2.25rem',
+                  padding: '2rem 1.5rem',
                   borderRadius: 'var(--radius-lg)',
                   border: '1px solid var(--color-border)',
                   display: 'flex',
                   flexDirection: 'column',
-                  justifyContent: 'space-between'
+                  justifyContent: 'space-between',
+                  width: '100%',
+                  boxSizing: 'border-box'
                 }}
               >
                 <div>
                   <div style={{
-                    width: '52px',
-                    height: '52px',
+                    width: '48px',
+                    height: '48px',
                     borderRadius: 'var(--radius-md)',
                     backgroundColor: 'var(--color-navy)',
                     color: 'var(--color-gold)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    marginBottom: '1.25rem'
+                    marginBottom: '1.15rem'
                   }}>
-                    <IconComp size={26} />
+                    <IconComp size={24} />
                   </div>
 
-                  <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '0.65rem' }}>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-navy)', marginBottom: '0.5rem', wordBreak: 'break-word' }}>
                     {pos.title}
                   </h3>
 
-                  <p style={{ fontSize: '0.94rem', color: 'var(--color-text-muted)', lineHeight: 1.6, marginBottom: '1.25rem' }}>
+                  <p style={{ fontSize: '0.92rem', color: 'var(--color-text-muted)', lineHeight: 1.55, marginBottom: '1.25rem' }}>
                     {pos.desc}
                   </p>
                 </div>
@@ -89,7 +93,7 @@ export default function RecruitmentSection() {
                 <button 
                   onClick={() => navigateTo('screening-exam-reg')}
                   className="btn btn-outline"
-                  style={{ width: '100%' }}
+                  style={{ width: '100%', boxSizing: 'border-box' }}
                 >
                   <span>Apply via Screening Exam</span>
                   <ArrowRight size={16} />
@@ -99,24 +103,33 @@ export default function RecruitmentSection() {
           })}
         </div>
 
-        {/* District Locations Strip */}
+        {/* District Locations Strip (Fixes Screenshot 5 Email & Text Overlap) */}
         <div style={{
           backgroundColor: 'var(--color-navy)',
           color: '#FFFFFF',
-          padding: '2rem',
+          padding: '2.25rem 1.5rem',
           borderRadius: 'var(--radius-lg)',
           border: '2px solid var(--color-gold)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           flexWrap: 'wrap',
-          gap: '1.5rem'
+          gap: '1.5rem',
+          width: '100%',
+          maxWidth: '100%',
+          boxSizing: 'border-box',
+          overflow: 'hidden'
         }}>
-          <div>
-            <div style={{ fontSize: '0.8rem', color: 'var(--color-gold)', fontWeight: 800, textTransform: 'uppercase' }}>
+          <div style={{ maxWidth: '100%', boxSizing: 'border-box' }}>
+            <div style={{ fontSize: '0.78rem', color: 'var(--color-gold)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.25rem' }}>
               DISTRICT COVERAGE
             </div>
-            <div style={{ fontSize: '1.3rem', fontWeight: 800 }}>
+            <div style={{
+              fontSize: 'clamp(1.05rem, 3.5vw, 1.3rem)',
+              fontWeight: 800,
+              lineHeight: 1.4,
+              wordBreak: 'break-word'
+            }}>
               Kasaragod | Kannur | Wayanad | Kozhikode
             </div>
           </div>
@@ -124,7 +137,18 @@ export default function RecruitmentSection() {
           <a 
             href="mailto:ilmconsultancy2026@gmail.com"
             className="btn btn-primary"
+            style={{
+              width: '100%',
+              maxWidth: '360px',
+              boxSizing: 'border-box',
+              wordBreak: 'break-all',
+              whiteSpace: 'normal',
+              justifyContent: 'center',
+              fontSize: '0.88rem',
+              padding: '0.8rem 1rem'
+            }}
           >
+            <Mail size={16} style={{ flexShrink: 0 }} />
             <span>Send CV: ilmconsultancy2026@gmail.com</span>
           </a>
         </div>
