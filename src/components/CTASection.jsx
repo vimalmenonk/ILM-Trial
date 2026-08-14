@@ -1,7 +1,9 @@
 import React from 'react';
+import { useApp } from '../context/AppContext';
 import { Mail, Calendar, Sparkles, Send, Copy, Check } from 'lucide-react';
 
-export default function CTASection({ onOpenApplyModal, onCopyEmail, copied }) {
+export default function CTASection({ onCopyEmail, copied }) {
+  const { navigateTo } = useApp();
   const email = 'ilmconsultancy2026@gmail.com';
 
   return (
@@ -9,71 +11,69 @@ export default function CTASection({ onOpenApplyModal, onCopyEmail, copied }) {
       style={{
         backgroundColor: 'var(--color-navy)',
         color: 'var(--color-white)',
-        padding: '5.5rem 0',
+        padding: '4.5rem 0',
         position: 'relative',
         overflow: 'hidden',
         borderTop: '4px solid var(--color-gold)',
-        borderBottom: '4px solid var(--color-gold)'
+        borderBottom: '4px solid var(--color-gold)',
+        width: '100%',
+        boxSizing: 'border-box'
       }}
     >
-      {/* Visual Accent Overlay */}
-      <div 
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'radial-gradient(ellipse at center, rgba(212, 175, 55, 0.15) 0%, rgba(11, 27, 61, 0) 75%)',
-          pointerEvents: 'none'
-        }}
-      />
-
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         <div style={{
           backgroundColor: 'rgba(255, 255, 255, 0.04)',
           border: '2px solid var(--color-gold)',
           borderRadius: 'var(--radius-lg)',
-          padding: '3.5rem 2.5rem',
+          padding: '2.5rem 1.25rem',
           textAlign: 'center',
           maxWidth: '960px',
           margin: '0 auto',
-          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.4)'
+          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.4)',
+          width: '100%',
+          boxSizing: 'border-box',
+          overflow: 'hidden'
         }}>
           
           {/* Top Star Banner */}
           <div style={{
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '0.6rem',
-            padding: '0.45rem 1.25rem',
+            gap: '0.5rem',
+            padding: '0.4rem 1rem',
             backgroundColor: 'rgba(212, 175, 55, 0.15)',
             border: '1px solid var(--color-gold)',
             borderRadius: 'var(--radius-full)',
             color: 'var(--color-gold)',
             fontWeight: 800,
-            fontSize: '0.9rem',
-            letterSpacing: '1.5px',
+            fontSize: '0.82rem',
+            letterSpacing: '1px',
             textTransform: 'uppercase',
-            marginBottom: '1.5rem'
+            marginBottom: '1.25rem',
+            maxWidth: '100%',
+            whiteSpace: 'normal'
           }}>
-            <Sparkles size={16} />
+            <Sparkles size={14} />
             <span>★ BE A PART OF ILM ★</span>
           </div>
 
           <h2 style={{
             fontFamily: 'var(--font-heading)',
-            fontSize: '2.6rem',
+            fontSize: 'clamp(1.75rem, 4.5vw, 2.6rem)',
             fontWeight: 800,
             color: 'var(--color-white)',
             lineHeight: 1.2,
-            marginBottom: '1rem'
+            marginBottom: '1rem',
+            wordBreak: 'break-word'
           }}>
             TOGETHER, LET'S SHAPE THE FUTURE!
           </h2>
 
           <p style={{
-            fontSize: '1.15rem',
+            fontSize: 'clamp(0.95rem, 2.5vw, 1.15rem)',
             color: 'rgba(255, 255, 255, 0.9)',
             maxWidth: '680px',
-            margin: '0 auto 2.25rem auto',
+            margin: '0 auto 1.75rem auto',
             lineHeight: 1.6
           }}>
             Send your updated resume directly to our recruitment desk. Mention your preferred district (Kasaragod, Kannur, Wayanad, or Kozhikode) in your email.
@@ -83,17 +83,21 @@ export default function CTASection({ onOpenApplyModal, onCopyEmail, copied }) {
           <div style={{
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '1rem',
+            justifyContent: 'center',
+            gap: '0.75rem',
             backgroundColor: 'var(--color-gold)',
             color: 'var(--color-navy-dark)',
-            padding: '0.85rem 1.75rem',
+            padding: '0.75rem 1.25rem',
             borderRadius: 'var(--radius-md)',
             fontWeight: 800,
-            fontSize: '1.1rem',
-            marginBottom: '2.5rem',
-            boxShadow: 'var(--shadow-gold)'
+            fontSize: 'clamp(0.9rem, 2.5vw, 1.05rem)',
+            marginBottom: '2rem',
+            boxShadow: 'var(--shadow-gold)',
+            maxWidth: '100%',
+            whiteSpace: 'normal',
+            boxSizing: 'border-box'
           }}>
-            <Calendar size={22} />
+            <Calendar size={20} style={{ flexShrink: 0 }} />
             <span>LAST DATE TO APPLY: AUGUST 10</span>
           </div>
 
@@ -102,9 +106,11 @@ export default function CTASection({ onOpenApplyModal, onCopyEmail, copied }) {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '1.25rem',
+            gap: '1rem',
             maxWidth: '580px',
-            margin: '0 auto'
+            margin: '0 auto',
+            width: '100%',
+            boxSizing: 'border-box'
           }}>
             
             <div style={{
@@ -114,16 +120,19 @@ export default function CTASection({ onOpenApplyModal, onCopyEmail, copied }) {
               width: '100%',
               backgroundColor: '#FFFFFF',
               borderRadius: 'var(--radius-md)',
-              padding: '0.75rem 1rem 0.75rem 1.25rem',
-              border: '2px solid var(--color-gold)'
+              padding: '0.65rem 0.85rem',
+              border: '2px solid var(--color-gold)',
+              boxSizing: 'border-box',
+              flexWrap: 'wrap',
+              gap: '0.5rem'
             }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <Mail size={20} color="var(--color-navy)" />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', minWidth: 0, flex: 1 }}>
+                <Mail size={18} color="var(--color-navy)" style={{ flexShrink: 0 }} />
                 <span style={{
-                  fontSize: '1.05rem',
+                  fontSize: 'clamp(0.85rem, 2.5vw, 1rem)',
                   fontWeight: 700,
                   color: 'var(--color-navy-dark)',
-                  letterSpacing: '0.5px'
+                  wordBreak: 'break-all'
                 }}>
                   {email}
                 </span>
@@ -135,38 +144,38 @@ export default function CTASection({ onOpenApplyModal, onCopyEmail, copied }) {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '0.4rem',
-                  padding: '0.45rem 0.85rem',
+                  gap: '0.35rem',
+                  padding: '0.4rem 0.75rem',
                   borderRadius: 'var(--radius-sm)',
                   backgroundColor: copied ? '#22c55e' : 'var(--color-bg-light)',
                   color: copied ? '#FFFFFF' : 'var(--color-navy)',
                   fontWeight: 700,
-                  fontSize: '0.85rem',
+                  fontSize: '0.82rem',
                   border: '1px solid var(--color-border)',
-                  transition: 'all 0.2s ease'
+                  flexShrink: 0
                 }}
               >
-                {copied ? <Check size={16} /> : <Copy size={16} />}
+                {copied ? <Check size={14} /> : <Copy size={14} />}
                 <span>{copied ? 'Copied!' : 'Copy'}</span>
               </button>
             </div>
 
-            <div style={{ display: 'flex', gap: '1rem', width: '100%', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '0.85rem', width: '100%', flexWrap: 'wrap' }}>
               <a 
-                href={`mailto:${email}?subject=Application%20for%20Executive%20Position%20-%20ILM%20Career%20Consultancy&body=Dear%20ILM%20Recruitment%20Team,%0A%0AI%20am%20interested%20in%20applying%20for%20a%20position%20at%20ILM%20Career%20Consultancy.%0A%0AApplied%20Position:%20[Student%20Relationship%20Executive%20/%20Sales%20Executive%20/%20Data%20Collection%20Executive]%0APreferred%20District:%20[Kasaragod%20/%20Kannur%20/%20Wayanad%20/%20Kozhikode]%0AQualification:%20[Plus%20Two%20/%20Degree%20/%20Fresher]%0AContact%20Number:%20%0A%0APlease%20find%20my%20attached%20CV.`}
+                href={`mailto:${email}?subject=Application%20for%20Executive%20Position%20-%20ILM%20Career%20Consultancy`}
                 className="btn btn-primary btn-lg"
-                style={{ flex: 1 }}
+                style={{ flex: 1, minWidth: '220px' }}
               >
-                <Send size={20} />
+                <Send size={18} />
                 <span>Send Your CV via Email</span>
               </a>
 
               <button 
-                onClick={onOpenApplyModal}
+                onClick={() => navigateTo('screening-exam-reg')}
                 className="btn btn-outline-gold btn-lg"
-                style={{ flex: 1 }}
+                style={{ flex: 1, minWidth: '220px' }}
               >
-                <span>Interactive Application</span>
+                <span>Interactive Registration</span>
               </button>
             </div>
 

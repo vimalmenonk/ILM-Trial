@@ -1,8 +1,11 @@
 import React from 'react';
+import { useApp } from '../context/AppContext';
 import Logo from './Logo';
 import { Mail, MapPin, ArrowUp } from 'lucide-react';
 
 export default function Footer() {
+  const { navigateTo } = useApp();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -11,27 +14,33 @@ export default function Footer() {
     <footer style={{
       backgroundColor: 'var(--color-navy-dark)',
       color: 'var(--color-white)',
-      padding: '4.5rem 0 2.5rem 0',
-      borderTop: '5px solid var(--color-gold)'
+      padding: '4rem 0 2rem 0',
+      borderTop: '5px solid var(--color-gold)',
+      width: '100%',
+      maxWidth: '100vw',
+      boxSizing: 'border-box',
+      overflowX: 'hidden'
     }}>
       <div className="container">
         
         {/* Main Footer Row */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: '1.4fr 1fr 1fr 1.2fr',
-          gap: '3rem',
-          paddingBottom: '3.5rem',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.12)'
-        }} className="footer-grid">
+          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+          gap: '2.5rem',
+          paddingBottom: '3rem',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.12)',
+          width: '100%',
+          boxSizing: 'border-box'
+        }}>
           
           {/* Column 1: Brand & Tagline */}
           <div>
-            <div style={{ marginBottom: '1.25rem' }}>
+            <div style={{ marginBottom: '1rem' }}>
               <Logo variant="light" size="normal" showTagline={true} />
             </div>
             <p style={{
-              fontSize: '0.92rem',
+              fontSize: '0.88rem',
               color: 'rgba(255, 255, 255, 0.75)',
               lineHeight: 1.6,
               maxWidth: '340px'
@@ -44,38 +53,42 @@ export default function Footer() {
           <div>
             <h4 style={{
               fontFamily: 'var(--font-heading)',
-              fontSize: '1.1rem',
+              fontSize: '1rem',
               fontWeight: 800,
               color: 'var(--color-gold)',
-              marginBottom: '1.25rem',
+              marginBottom: '1rem',
               letterSpacing: '1px',
               textTransform: 'uppercase'
             }}>
               Quick Navigation
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
               {[
-                { label: 'Home', href: '#home' },
-                { label: 'About ILM', href: '#about' },
-                { label: 'Career Opportunities', href: '#opportunities' },
-                { label: 'What You Will Do', href: '#responsibilities' },
-                { label: 'Eligibility & Benefits', href: '#eligibility' },
-                { label: 'Locations', href: '#locations' },
-                { label: 'Contact Desk', href: '#contact' },
+                { label: 'Home', view: 'home' },
+                { label: 'About ILMI', view: 'about' },
+                { label: 'Course Finder', view: 'course-finder' },
+                { label: 'Academic Programs', view: 'programs' },
+                { label: 'Screening Exam', view: 'screening-exam-reg' },
+                { label: 'Student Login', view: 'student-login' },
+                { label: 'FAQ', view: 'faq' },
               ].map((item) => (
                 <li key={item.label}>
-                  <a 
-                    href={item.href}
+                  <button 
+                    onClick={() => navigateTo(item.view)}
                     style={{
-                      fontSize: '0.92rem',
+                      fontSize: '0.88rem',
                       color: 'rgba(255, 255, 255, 0.8)',
                       transition: 'color 0.2s ease',
-                      fontWeight: 500
+                      fontWeight: 500,
+                      background: 'none',
+                      border: 'none',
+                      padding: 0,
+                      textAlign: 'left'
                     }}
                     className="footer-link"
                   >
-                    {item.label}
-                  </a>
+                    • {item.label}
+                  </button>
                 </li>
               ))}
             </ul>
@@ -85,25 +98,25 @@ export default function Footer() {
           <div>
             <h4 style={{
               fontFamily: 'var(--font-heading)',
-              fontSize: '1.1rem',
+              fontSize: '1rem',
               fontWeight: 800,
               color: 'var(--color-gold)',
-              marginBottom: '1.25rem',
+              marginBottom: '1rem',
               letterSpacing: '1px',
               textTransform: 'uppercase'
             }}>
               Districts
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
               {['Kasaragod', 'Kannur', 'Wayanad', 'Kozhikode'].map((loc) => (
                 <li key={loc} style={{
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.5rem',
-                  fontSize: '0.92rem',
+                  fontSize: '0.88rem',
                   color: 'rgba(255, 255, 255, 0.85)'
                 }}>
-                  <MapPin size={16} color="var(--color-gold)" />
+                  <MapPin size={15} color="var(--color-gold)" style={{ flexShrink: 0 }} />
                   <span>{loc}</span>
                 </li>
               ))}
@@ -114,10 +127,10 @@ export default function Footer() {
           <div>
             <h4 style={{
               fontFamily: 'var(--font-heading)',
-              fontSize: '1.1rem',
+              fontSize: '1rem',
               fontWeight: 800,
               color: 'var(--color-gold)',
-              marginBottom: '1.25rem',
+              marginBottom: '1rem',
               letterSpacing: '1px',
               textTransform: 'uppercase'
             }}>
@@ -128,19 +141,21 @@ export default function Footer() {
               backgroundColor: 'rgba(255, 255, 255, 0.05)',
               border: '1px solid var(--color-gold)',
               borderRadius: 'var(--radius-md)',
-              padding: '1rem',
-              marginBottom: '1rem'
+              padding: '0.85rem 1rem',
+              marginBottom: '0.85rem',
+              width: '100%',
+              boxSizing: 'border-box'
             }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.35rem' }}>
-                <Mail size={18} color="var(--color-gold)" />
-                <span style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--color-gold)', textTransform: 'uppercase' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
+                <Mail size={16} color="var(--color-gold)" style={{ flexShrink: 0 }} />
+                <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--color-gold)', textTransform: 'uppercase' }}>
                   Official Email
                 </span>
               </div>
               <a 
                 href="mailto:ilmconsultancy2026@gmail.com"
                 style={{
-                  fontSize: '0.94rem',
+                  fontSize: '0.88rem',
                   fontWeight: 700,
                   color: '#FFFFFF',
                   wordBreak: 'break-all'
@@ -151,7 +166,7 @@ export default function Footer() {
             </div>
 
             <div style={{
-              fontSize: '0.82rem',
+              fontSize: '0.8rem',
               color: 'rgba(255, 255, 255, 0.7)',
               lineHeight: 1.5
             }}>
@@ -164,15 +179,15 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div style={{
-          paddingTop: '2rem',
+          paddingTop: '1.5rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           flexWrap: 'wrap',
           gap: '1rem'
         }}>
-          <div style={{ fontSize: '0.88rem', color: 'rgba(255, 255, 255, 0.6)' }}>
-            © {new Date().getFullYear()} <strong>ILM Career Consultancy</strong>. INTEGRITY • LEARNING • MASTERY. All Rights Reserved.
+          <div style={{ fontSize: '0.82rem', color: 'rgba(255, 255, 255, 0.6)' }}>
+            © {new Date().getFullYear()} <strong>ILM Career Consultancy</strong>. INTEGRITY • LEARNING • MASTERY.
           </div>
 
           <button 
@@ -180,20 +195,20 @@ export default function Footer() {
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '0.5rem',
+              gap: '0.4rem',
               backgroundColor: 'rgba(212, 175, 55, 0.15)',
               border: '1px solid var(--color-gold)',
               color: 'var(--color-gold)',
-              padding: '0.5rem 1rem',
+              padding: '0.4rem 0.85rem',
               borderRadius: 'var(--radius-sm)',
-              fontSize: '0.85rem',
+              fontSize: '0.82rem',
               fontWeight: 700,
               transition: 'all 0.2s ease'
             }}
             className="back-to-top"
           >
             <span>Back to Top</span>
-            <ArrowUp size={16} />
+            <ArrowUp size={14} />
           </button>
         </div>
 
@@ -202,21 +217,10 @@ export default function Footer() {
       <style>{`
         .footer-link:hover {
           color: var(--color-gold) !important;
-          padding-left: 4px;
         }
         .back-to-top:hover {
           background-color: var(--color-gold) !important;
           color: var(--color-navy-dark) !important;
-        }
-        @media (max-width: 992px) {
-          .footer-grid {
-            grid-template-columns: 1fr 1fr !important;
-          }
-        }
-        @media (max-width: 600px) {
-          .footer-grid {
-            grid-template-columns: 1fr !important;
-          }
         }
       `}</style>
     </footer>
